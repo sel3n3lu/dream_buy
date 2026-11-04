@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5f2ec">
+  <meta name="description" content="DREAM BUY 梦想购：只体验购物快乐，不花真实的钱。">
+  <title>DREAM BUY · 梦想购</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+  <style>
+    :root{--bg:#f5f2ec;--paper:#fffefa;--ink:#242321;--muted:#89867f;--line:#e8e4dc;--soft:#eeebe4;--accent:#b8a895;--green:#647c68;--danger:#a45e55;--shadow:0 12px 35px rgba(40,35,28,.06)}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+    button,input,select{font:inherit} button{cursor:pointer}
+    .app{max-width:1120px;margin:auto;padding:20px 22px 110px}
+    header{display:flex;justify-content:space-between;align-items:center;padding:12px 0 24px;border-bottom:1px solid var(--line)}
+    .brand{font-size:14px;letter-spacing:.23em;font-weight:800}.brand small{display:block;font-size:10px;letter-spacing:.22em;color:var(--muted);font-weight:500;margin-top:5px}
+    .top-actions{display:flex;gap:8px;align-items:center}.pill{border:1px solid var(--line);border-radius:30px;padding:8px 13px;background:var(--paper);font-size:12px}
+    .hero{padding:34px 0 28px;display:flex;justify-content:space-between;gap:24px;align-items:end}
+    .eyebrow{font-size:10px;letter-spacing:.2em;color:var(--muted);font-weight:700}.hero h1{font-family:Georgia,serif;font-weight:500;font-size:clamp(35px,6vw,64px);line-height:1.03;margin:13px 0 12px;letter-spacing:-.045em}.hero p{color:var(--muted);font-size:13px;line-height:1.8;margin:0;max-width:490px}
+    .wallet-chip{background:var(--ink);color:#fffefa;border-radius:18px;padding:17px 20px;min-width:190px;box-shadow:var(--shadow)}.wallet-chip span{font-size:11px;color:#c7c1b8}.wallet-chip strong{display:block;font-size:25px;font-weight:500;margin-top:7px;font-variant-numeric:tabular-nums}
+    nav{display:flex;gap:5px;overflow:auto;padding:6px;background:#eae6de;border-radius:14px;margin:10px 0 24px;scrollbar-width:none}nav button{border:0;background:transparent;color:#77736d;padding:11px 16px;border-radius:10px;white-space:nowrap;font-size:12px}nav button.active{background:var(--paper);color:var(--ink);box-shadow:0 2px 8px #0000000b}
+    .section-head{display:flex;justify-content:space-between;align-items:end;margin:22px 0 14px}.section-head h2{font-size:20px;font-weight:550;margin:0}.section-head p{font-size:11px;color:var(--muted);margin:6px 0 0}
+    .toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:17px}.search{flex:1;min-width:190px}.field{border:1px solid var(--line);background:var(--paper);border-radius:11px;padding:11px 13px;color:var(--ink);outline:none;width:100%}.field:focus{border-color:#aaa092}
+    .filters{display:flex;gap:6px;flex-wrap:wrap}.filter{border:1px solid var(--line);background:transparent;border-radius:30px;padding:9px 13px;font-size:11px;color:#77736d}.filter.active{background:var(--ink);border-color:var(--ink);color:white}
+    .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}.product{background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:12px;transition:.2s;min-width:0}.product:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+    .product-art{height:145px;border-radius:11px;background:linear-gradient(145deg,#eeeae2,#e2ddd4);display:grid;place-items:center;font-size:53px;position:relative}.product-art small{position:absolute;top:10px;left:10px;background:#fffefaaf;padding:5px 8px;border-radius:20px;font-size:9px;color:#615d56}
+    .product h3{font-size:13px;font-weight:550;margin:12px 0 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.meta{font-size:10px;color:var(--muted)}.price-row{display:flex;align-items:center;justify-content:space-between;margin-top:12px}.price{font-family:Georgia,serif;font-size:19px}.add{border:0;background:var(--ink);color:white;border-radius:50%;width:31px;height:31px;font-size:18px}
+    .panel{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:12px}.muted{color:var(--muted)}.small{font-size:11px;line-height:1.7}.btn{border:1px solid var(--ink);background:var(--ink);color:white;border-radius:10px;padding:11px 16px;font-size:12px}.btn.secondary{background:transparent;color:var(--ink);border-color:var(--line)}.btn.soft{background:var(--soft);border-color:var(--soft);color:var(--ink)}.btn:disabled{opacity:.35;cursor:not-allowed}
+    .row{display:flex;justify-content:space-between;align-items:center;gap:12px}.row+.row{margin-top:12px}.total{font-family:Georgia,serif;font-size:27px}.cart-item{display:grid;grid-template-columns:54px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}.cart-icon{height:54px;background:var(--soft);border-radius:10px;display:grid;place-items:center;font-size:26px}
+    .qty{display:flex;gap:7px;align-items:center}.qty button{border:1px solid var(--line);background:white;border-radius:50%;width:25px;height:25px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{background:var(--soft);padding:15px;border-radius:12px}.stat span{font-size:10px;color:var(--muted)}.stat strong{display:block;font-family:Georgia,serif;font-size:22px;font-weight:500;margin-top:7px}
+    .progress{height:7px;background:var(--soft);border-radius:10px;overflow:hidden}.progress i{display:block;height:100%;background:var(--green);border-radius:10px}
+    .order{border:1px solid var(--line);border-radius:13px;padding:15px;margin:10px 0}.status{font-size:10px;border-radius:20px;background:#e8eee7;color:#536c56;padding:5px 9px}.toast{position:fixed;left:50%;bottom:95px;transform:translateX(-50%);background:#282724;color:white;padding:12px 17px;border-radius:30px;font-size:12px;box-shadow:var(--shadow);z-index:10;max-width:90%;text-align:center}
+    .empty{text-align:center;padding:48px 15px;color:var(--muted)}.empty b{display:block;font-size:36px;margin-bottom:12px}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.badge{font-size:9px;color:#756e64;background:var(--soft);padding:5px 8px;border-radius:20px}
+    footer{text-align:center;color:#aaa49a;font-size:10px;padding:28px 0 10px;letter-spacing:.06em}
+    .modal-backdrop{position:fixed;inset:0;background:#17161377;display:grid;place-items:center;padding:18px;z-index:20}.modal{background:var(--paper);border-radius:18px;padding:22px;max-width:420px;width:100%;box-shadow:var(--shadow)}.modal .big-emoji{font-size:65px;text-align:center;padding:20px;background:var(--soft);border-radius:14px}
+    @media(max-width:760px){.app{padding:12px 14px 100px}.hero{align-items:start;flex-direction:column;padding:27px 0 20px}.wallet-chip{width:100%}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.product{padding:9px}.product-art{height:120px}.stats{grid-template-columns:1fr 1fr}.stats .stat:last-child{grid-column:span 2}.section-head h2{font-size:18px}}
+    @media(min-width:761px) and (max-width:1000px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+    @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="brand">DREAM BUY <small>YOUR LITTLE SHOPPING UNIVERSE</small></div>
+    <div class="top-actions"><span class="pill">✦ 虚拟消费</span><button class="pill" id="installBtn" hidden>安装 APP</button></div>
+  </header>
+  <section class="hero">
+    <div><div class="eyebrow">A LITTLE JOY, ZERO SPENDING</div><h1>Buy the feeling.<br>Keep your money.</h1><p>把购物的快乐留给自己，把真实的钱留在口袋里。这里的每一笔订单、每一次付款，都是安全的虚拟体验。</p></div>
+    <div class="wallet-chip"><span>我的虚拟钱包 · GAME COINS</span><strong id="balance">¥10,000.00</strong><span>游戏币，不可提现，不连接真实支付</span></div>
+  </section>
+  <nav id="nav">
+    <button class="active" data-page="shop">商城</button><button data-page="cart">购物车 <span id="cartCount">0</span></button><button data-page="orders">订单物流</button><button data-page="wallet">钱包统计</button><button data-page="challenge">消费挑战</button><button data-page="achievements">我的成就</button><button data-page="wishlist">心愿清单</button>
+  </nav>
+  <main id="main"></main>
+  <footer>DREAM BUY · SHOP FOR JOY, NOT FOR REAL · ALL PAYMENTS ARE SIMULATED</footer>
+</div>
+<div id="toast" class="toast" hidden></div>
+<div id="modalRoot"></div>
+<script>
+const $=s=>document.querySelector(s);
+const categories=["全部","穿搭","配饰","美妆","数码","追星","生活"];
+const products=[
+[1,"韩系廓形西装外套",289,"穿搭","🧥","人气新品"],[2,"复古银色耳骨夹",39,"配饰","💎","今日特惠"],[3,"极简腋下包",169,"配饰","👜","热卖"],[4,"木质调香氛",129,"美妆","🧴","氛围感"],[5,"无线降噪耳机",399,"数码","🎧","科技好物"],[6,"毛绒小熊玩偶",89,"生活","🧸","治愈系"],[7,"偶像小卡盲袋",29,"追星","🎴","随机惊喜"],[8,"复古银色项链",119,"配饰","📿","精致生活"],[9,"拍立得相机",599,"数码","📷","限定"],[10,"桌面花瓶摆件",49,"生活","🌷","宿舍好物"],[11,"设计感运动鞋",329,"穿搭","👟","新品"],[12,"奶油肌粉底液",159,"美妆","💄","人气单品"],[13,"明星应援手灯",259,"追星","💡","演唱会必备"],[14,"设计师墨镜",139,"穿搭","🕶️","时髦单品"],[15,"迷你桌面音箱",199,"数码","🔊","音乐时间"],[16,"云朵抱枕",69,"生活","☁️","舒适生活"],[17,"腮红眼影盘",99,"美妆","🎨","新品"],[18,"演唱会虚拟门票",399,"追星","🎫","特别体验"],[19,"设计感针织开衫",229,"穿搭","🧶","秋冬新品"],[20,"珍珠发夹套装",59,"配饰","🎀","精致小物"],[21,"复古运动帽",79,"穿搭","🧢","日常百搭"],[22,"香氛蜡烛",89,"生活","🕯️","氛围生活"],[23,"手机拍照支架",45,"数码","📱","实用好物"],[24,"星星发光灯串",35,"生活","✨","房间布置"]
+].map(x=>({id:x[0],name:x[1],price:x[2],cat:x[3],emoji:x[4],tag:x[5]}));
+const defaultState={balance:10000,cart:[],orders:[],wishlist:[],joy:0,streak:0,lastChallenge:"",challengeDone:false,unboxed:[],created:Date.now()};
+let state;
+try{state={...defaultState,...JSON.parse(localStorage.getItem("dreambuy-state")||"{}")}}catch{state={...defaultState}}
+let page="shop",category="全部",search="",selected=null,coupon="none",toastTimer;
+function save(){localStorage.setItem("dreambuy-state",JSON.stringify(state));updateHeader()}
+function money(n){return "¥"+Number(n).toFixed(2)}
+function updateHeader(){$("#balance").textContent=money(state.balance);$("#cartCount").textContent=state.cart.reduce((n,x)=>n+x.qty,0)}
+function toast(msg){let t=$("#toast");t.textContent=msg;t.hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.hidden=true,2400)}
+function go(p){page=p;selected=null;document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===p));render()}
+$("#nav").addEventListener("click",e=>{let b=e.target.closest("button[data-page]");if(b)go(b.dataset.page)});
+function add(id){let p=products.find(x=>x.id===id);let old=state.cart.find(x=>x.id===id);if(old)old.qty++;else state.cart.push({...p,qty:1,variant:"经典款"});save();toast("已放进购物车 ♡")}
+function total(){return state.cart.reduce((s,x)=>s+x.price*x.qty,0)}
+function discount(){let t=total();return coupon==="300"&&t>=300?30:coupon==="500"&&t>=500?60:0}
+function render(){
+ let m=$("#main");
+ if(page==="shop"){
+  let list=products.filter(p=>(category==="全部"||p.cat===category)&&p.name.toLowerCase().includes(search.toLowerCase()));
+  m.innerHTML=`<div class="section-head"><div><h2>本周心动单品</h2><p>慢慢逛，不用急着买。</p></div><span class="badge">CURATED FOR YOU</span></div>
+  <div class="toolbar"><input class="field search" id="search" placeholder="搜索商品名称…" value="${esc(search)}"><div class="filters">${categories.map(c=>`<button class="filter ${c===category?"active":""}" data-cat="${c}">${c}</button>`).join("")}</div></div>
+  <div class="grid">${list.map(p=>`<article class="product"><div class="product-art"><small>${p.tag}</small>${p.emoji}</div><h3>${p.name}</h3><div class="meta">${p.cat} · 虚拟商品</div><div class="price-row"><span class="price">${money(p.price)}</span><button class="add" data-add="${p.id}" aria-label="加入购物车">+</button></div><button class="btn secondary" style="width:100%;margin-top:9px;padding:8px" data-detail="${p.id}">查看详情</button></article>`).join("")}</div>`;
+  $("#search").addEventListener("input",e=>{search=e.target.value;let pos=e.target.selectionStart;render();$("#search").focus();$("#search").setSelectionRange(pos,pos)});
+  m.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{category=b.dataset.cat;render()});
+  m.querySelectorAll("[data-add]").forEach(b=>b.onclick=()=>add(+b.dataset.add));
+  m.querySelectorAll("[data-detail]").forEach(b=>b.onclick=()=>detail(+b.dataset.detail));
+ }else if(page==="cart"){
+  if(!state.cart.length){m.innerHTML=empty("🛒","购物车还是空的","去挑选几件让你开心的东西吧。","去逛商城","shop");return}
+  m.innerHTML=`<div class="section-head"><div><h2>我的购物车</h2><p>全部商品均为虚拟商品。</p></div></div><div class="panel">${state.cart.map(x=>`<div class="cart-item"><div class="cart-icon">${x.emoji}</div><div><b style="font-size:13px">${x.name}</b><div class="meta">${x.variant} · ${money(x.price)}</div><div class="qty" style="margin-top:8px"><button data-qty="${x.id}" data-delta="-1">−</button>${x.qty}<button data-qty="${x.id}" data-delta="1">+</button></div></div><div style="text-align:right"><b>${money(x.price*x.qty)}</b><div><button class="filter" data-remove="${x.id}" style="margin-top:9px">移除</button></div></div></div>`).join("")}</div>
+  <div class="panel"><div class="row"><span class="muted small">优惠券</span><select class="field" style="max-width:190px" id="coupon"><option value="none">不使用优惠券</option><option value="300">满300减30</option><option value="500">满500减60</option></select></div><div class="row"><span class="muted small">商品总额</span><b>${money(total())}</b></div><div class="row"><span class="muted small">优惠金额</span><b style="color:var(--green)">−${money(discount())}</b></div><div class="row" style="border-top:1px solid var(--line);padding-top:14px"><b>模拟付款金额</b><span class="total">${money(total()-discount())}</span></div><p class="small muted">支付仅扣除游戏币，不会触发任何真实支付。</p><button class="btn" id="checkout" style="width:100%" ${total()-discount()>state.balance?"disabled":""}>确认模拟付款</button></div>`;
+  $("#coupon").value=coupon;$("#coupon").onchange=e=>{coupon=e.target.value;render()};m.querySelectorAll("[data-qty]").forEach(b=>b.onclick=()=>{let x=state.cart.find(x=>x.id==b.dataset.qty);x.qty+=+b.dataset.delta;if(x.qty<1)state.cart=state.cart.filter(y=>y.id!==x.id);save();render()});m.querySelectorAll("[data-remove]").forEach(b=>b.onclick=()=>{state.cart=state.cart.filter(x=>x.id!=b.dataset.remove);save();render()});$("#checkout").onclick=checkout;
+ }else if(page==="orders"){
+  m.innerHTML=`<div class="section-head"><div><h2>订单与物流</h2><p>体验从下单到拆箱的完整流程。</p></div></div>${state.orders.length?state.orders.map(o=>`<div class="order"><div class="row"><b>${o.id}</b><span class="status">${o.status}</span></div><p class="meta">${new Date(o.time).toLocaleString()}</p>${o.items.map(x=>`<div class="row small"><span>${x.emoji} ${x.name} × ${x.qty}</span><b>${money(x.price*x.qty)}</b></div>`).join("")}<div class="row" style="border-top:1px solid var(--line);padding-top:12px;margin-top:12px"><span class="small muted">订单金额</span><b>${money(o.total)}</b></div><div style="margin-top:13px">${o.status==="待发货"?`<button class="btn" data-ship="${o.id}">模拟商家发货</button>`:o.status==="运输中"?`<button class="btn" data-receive="${o.id}">模拟确认收货</button>`:state.unboxed.includes(o.id)?`<span class="badge">已拆箱 · 快乐已收藏</span>`:`<button class="btn" data-unbox="${o.id}">🎁 拆开我的快递</button>`}</div></div>`).join(""):emptyHTML("📦","还没有订单","完成一次模拟付款，订单就会出现在这里。")}`;
+  m.querySelectorAll("[data-ship]").forEach(b=>b.onclick=()=>changeOrder(b.dataset.ship,"运输中","商家已发货，快递正在路上 🚚"));m.querySelectorAll("[data-receive]").forEach(b=>b.onclick=()=>changeOrder(b.dataset.receive,"已签收","包裹已送达！快来拆箱 🎁"));m.querySelectorAll("[data-unbox]").forEach(b=>b.onclick=()=>{state.unboxed.push(b.dataset.unbox);state.joy+=20;save();toast("拆箱成功！快乐值 +20 ✨");render()});
+ }else if(page==="wallet"){
+  let now=Date.now(),today=state.orders.filter(o=>new Date(o.time).toDateString()===new Date().toDateString()),week=state.orders.filter(o=>now-o.time<7*86400000),month=state.orders.filter(o=>new Date(o.time).getMonth()===new Date().getMonth()&&new Date(o.time).getFullYear()===new Date().getFullYear());
+  let sum=a=>a.reduce((s,o)=>s+o.total,0);
+  m.innerHTML=`<div class="section-head"><div><h2>虚拟钱包</h2><p>记录游戏中的每一笔快乐消费。</p></div></div><div class="panel" style="background:var(--ink);color:white"><span class="small" style="color:#c9c2b8">CURRENT GAME BALANCE</span><div class="total" style="font-size:38px;margin:8px 0">${money(state.balance)}</div><span class="small" style="color:#c9c2b8">游戏币，不可提现</span></div><div class="stats"><div class="stat"><span>今日模拟消费</span><strong>${money(sum(today))}</strong></div><div class="stat"><span>本周模拟消费</span><strong>${money(sum(week))}</strong></div><div class="stat"><span>本月模拟消费</span><strong>${money(sum(month))}</strong></div></div><div class="panel" style="margin-top:13px"><h3 style="font-size:14px">游戏币补充</h3><p class="small muted">仅用于游戏体验。建议保留初始额度，体验预算管理。</p><div class="row"><input class="field" id="recharge" type="number" min="1" max="100000" placeholder="输入游戏币数量"><button class="btn" id="rechargeBtn">补充</button></div></div><div class="panel"><div class="row"><b>快乐值</b><span class="total">${state.joy} ✦</span></div><p class="small muted">模拟付款 +10；拆快递 +20；完成挑战 +15。</p></div>`;
+  $("#rechargeBtn").onclick=()=>{let n=Number($("#recharge").value);if(!Number.isFinite(n)||n<=0||n>100000)return toast("请输入 1–100000 的金额");state.balance+=n;save();toast("游戏币已补充");render()};
+ }else if(page==="challenge"){
+  let date=new Date().toISOString().slice(0,10),done=state.lastChallenge===date;
+  m.innerHTML=`<div class="section-head"><div><h2>把钱留给真正重要的事</h2><p>每天一个小挑战，慢慢练习和冲动消费拉开距离。</p></div><span class="badge">DAILY RESET</span></div><div class="panel"><div class="eyebrow">YOUR STREAK</div><div class="total" style="font-size:44px;margin:8px 0">🔥 ${state.streak} 天</div><p class="small muted">连续完成的挑战天数。每天最多领取一次奖励。</p><div class="progress"><i style="width:${done?100:35}%"></i></div><p style="font-size:13px;margin:18px 0 8px"><b>今日挑战：先暂停，再决定。</b></p><p class="small muted">当你想买一件非必需品时，先把它加入心愿清单，离开购物页面，等待24小时。今天成功抵抗一次冲动消费，就回来领取奖励。</p><button class="btn" id="challengeDone" style="width:100%" ${done?"disabled":""}>${done?"今日挑战已完成 ✓":"我今天成功暂停了一次冲动购买 · +15 快乐值"}</button></div><div class="panel"><b>24小时冷静清单</b><ol class="small muted" style="line-height:2"><li>先收藏，不立刻付款。</li><li>问自己：我是真的需要，还是只是无聊？</li><li>24小时后再看一次。</li><li>如果不买也没关系，给自己一个赞。</li></ol></div>`;
+  $("#challengeDone").onclick=()=>{let yesterday=new Date(Date.now()-86400000).toISOString().slice(0,10);state.streak=state.lastChallenge===yesterday?state.streak+1:1;state.lastChallenge=date;state.joy+=15;save();toast("挑战成功！快乐值 +15 🌟");render()};
+ }else if(page==="achievements"){
+  let achievements=[["💌","初次心动","完成第一笔模拟订单",state.orders.length>=1],["🛍️","购物达人","完成5笔模拟订单",state.orders.length>=5],["🎁","拆箱快乐","拆开第一件虚拟快递",state.unboxed.length>=1],["💎","快乐收藏家","累计获得100快乐值",state.joy>=100],["🏆","克制大师","连续完成3天挑战",state.streak>=3],["👑","购物宇宙","完成10笔模拟订单",state.orders.length>=10]];
+  m.innerHTML=`<div class="section-head"><div><h2>我的成就</h2><p>每一次快乐体验，都值得被记录。</p></div></div><div class="panel"><span class="small muted">TOTAL JOY POINTS</span><div class="total">${state.joy} ✦</div></div>${achievements.map(a=>`<div class="panel row"><div style="display:flex;gap:13px;align-items:center"><span style="font-size:28px">${a[0]}</span><div><b style="font-size:13px">${a[1]}</b><div class="meta">${a[2]}</div></div></div><span class="badge" style="${a[3]?"background:#e7eee6;color:#55705a":""}">${a[3]?"已解锁":"未解锁"}</span></div>`).join("")}`;
+ }else if(page==="wishlist"){
+  let list=state.wishlist.map(id=>products.find(p=>p.id===id)).filter(Boolean);
+  m.innerHTML=`<div class="section-head"><div><h2>心愿清单</h2><p>先收藏，给真实购物决定留出24小时。</p></div></div>${list.length?`<div class="grid">${list.map(p=>`<article class="product"><div class="product-art">${p.emoji}</div><h3>${p.name}</h3><div class="price-row"><span class="price">${money(p.price)}</span><button class="filter" data-wremove="${p.id}">移除</button></div><button class="btn secondary" style="width:100%;margin-top:9px" data-add="${p.id}">加入虚拟购物车</button></article>`).join("")}</div>`:emptyHTML("♡","心愿清单还是空的","把心动商品先收藏起来，24小时后再决定。")}`;
+  m.querySelectorAll("[data-wremove]").forEach(b=>b.onclick=()=>{state.wishlist=state.wishlist.filter(id=>id!=b.dataset.wremove);save();render()});m.querySelectorAll("[data-add]").forEach(b=>b.onclick=()=>add(+b.dataset.add));
+ }
+ updateHeader();
+}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function emptyHTML(e,t,d){return `<div class="empty"><b>${e}</b><strong>${t}</strong><p class="small">${d}</p></div>`}
+function empty(e,t,d,label,target){return `<div class="empty"><b>${e}</b><strong>${t}</strong><p class="small">${d}</p><button class="btn" id="emptyGo">${label}</button></div>`}
+function detail(id){let p=products.find(x=>x.id===id);let root=$("#modalRoot");root.innerHTML=`<div class="modal-backdrop" id="backdrop"><div class="modal"><div class="row"><b>商品详情</b><button class="filter" id="closeModal">关闭 ×</button></div><div class="big-emoji">${p.emoji}</div><h2 style="font-size:18px">${p.name}</h2><div class="total">${money(p.price)}</div><p class="small muted">虚拟商品 · 仅供购物模拟体验</p><label class="small">选择规格</label><select class="field" id="variant"><option>经典款</option><option>限定款</option><option>精美礼盒包装</option></select><div class="row" style="margin-top:15px"><button class="btn secondary" id="wish">♡ 收藏心愿</button><button class="btn" id="addDetail">加入购物车</button></div></div></div>`;
+ $("#closeModal").onclick=()=>root.innerHTML="";$("#backdrop").onclick=e=>{if(e.target.id==="backdrop")root.innerHTML=""};$("#wish").onclick=()=>{if(!state.wishlist.includes(id))state.wishlist.push(id);save();root.innerHTML="";toast("已加入心愿清单 ♡")};$("#addDetail").onclick=()=>{add(id);let x=state.cart.find(x=>x.id===id);x.variant=$("#variant").value;save();root.innerHTML=""}
+}
+function checkout(){let t=total()-discount();if(!state.cart.length||t>state.balance)return;let order={id:"DB"+Date.now().toString().slice(-8),items:state.cart.map(x=>({...x})),total:t,time:Date.now(),status:"待发货"};state.balance-=t;state.orders.unshift(order);state.cart=[];state.joy+=10;coupon="none";save();go("orders");toast("模拟付款成功！快乐值 +10 ✨")}
+function changeOrder(id,status,msg){let o=state.orders.find(x=>x.id===id);if(o)o.status=status;save();render();toast(msg)}
+render();updateHeader();
+let deferredPrompt=null;
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;$("#installBtn").hidden=false});
+$("#installBtn").onclick=async()=>{if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;$("#installBtn").hidden=true}else toast("请使用浏览器菜单中的“添加到主屏幕”")};
+if("serviceWorker" in navigator && location.protocol.startsWith("http"))window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+</script>
+</body>
+</html>
