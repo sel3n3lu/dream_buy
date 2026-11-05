@@ -46,3 +46,4 @@ Safari 可将网页添加到 Dock（取决于 macOS 版本）。
 
 ## 说明
 这是一个前端单机 PWA 原型。没有账号系统、服务器数据库或应用商店上架配置。
+DREAM BUY deployment update.
