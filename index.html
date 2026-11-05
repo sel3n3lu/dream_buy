@@ -128,6 +128,101 @@ let deferredPrompt=null;
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;$("#installBtn").hidden=false});
 $("#installBtn").onclick=async()=>{if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;$("#installBtn").hidden=true}else toast("请使用浏览器菜单中的“添加到主屏幕”")};
 if("serviceWorker" in navigator && location.protocol.startsWith("http"))window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+// DREAM BUY 数据备份：导出
+function exportDreamBuyBackup(){
+  try{
+    const backup={
+      app:"DREAM BUY",
+      version:1,
+      exportedAt:new Date().toISOString(),
+      state:state
+    };
+    const blob=new Blob(
+      [JSON.stringify(backup,null,2)],
+      {type:"application/json"}
+    );
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a");
+    a.href=url;
+    a.download="DREAM-BUY-backup-"+new Date().toISOString().slice(0,10)+".json";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    toast("备份已导出！请妥善保存文件 ♡");
+  }catch(error){
+    toast("导出失败，请稍后重试");
+  }
+}
+// DREAM BUY 数据备份：恢复
+function importDreamBuyBackup(file){
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=()=>{
+    try{
+      const backup=JSON.parse(reader.result);
+      const restored=backup&&backup.app==="DREAM BUY"&&backup.version===1?backup.state:null;
+      const keys=["balance","cart","orders","wishlist","joy","streak","lastChallenge","challengeDone","unboxed","created"];
+      if(!restored||typeof restored!=="object"||!keys.every(k=>Object.prototype.hasOwnProperty.call(restored,k)))throw new Error("备份文件格式不正确");
+      if(!Number.isFinite(Number(restored.balance))||!Array.isArray(restored.cart)||!Array.isArray(restored.orders)||!Array.isArray(restored.wishlist)||!Array.isArray(restored.unboxed))throw new Error("备份数据不完整");
+      if(!confirm("恢复备份会覆盖当前 DREAM BUY 数据。建议先导出当前数据。确定继续吗？"))return;
+      state={...defaultState,...restored};
+      save();
+      render();
+      toast("数据恢复成功！欢迎回来 ♡");
+    }catch(error){
+      toast("恢复失败："+(error.message||"无法读取文件"));
+    }
+  };
+  reader.onerror=()=>toast("文件读取失败，请重试");
+  reader.readAsText(file);
+}
+
+// 创建数据备份入口
+function showBackupMenu(){
+  const root=$("#modalRoot");
+  root.innerHTML=`
+    <div class="modal-backdrop" id="backupBackdrop">
+      <div class="modal">
+        <div class="row">
+          <b>数据备份与恢复</b>
+          <button class="filter" id="closeBackup">关闭 ×</button>
+        </div>
+        <p class="small muted">把你的钱包余额、订单、购物车和心愿清单保存到手机。换设备时可以通过备份文件恢复。</p>
+        <div class="two">
+          <button class="btn" id="doExport">导出备份</button>
+          <button class="btn secondary" id="doImport">恢复备份</button>
+        </div>
+        <input id="backupFile" type="file" accept=".json,application/json" hidden>
+      </div>
+    </div>`;
+  $("#closeBackup").onclick=()=>root.innerHTML="";
+  $("#backupBackdrop").onclick=e=>{
+    if(e.target.id==="backupBackdrop")root.innerHTML="";
+  };
+  $("#doExport").onclick=exportDreamBuyBackup;
+  $("#doImport").onclick=()=>$("#backupFile").click();
+  $("#backupFile").onchange=e=>{
+    const file=e.target.files[0];
+    if(file){
+      root.innerHTML="";
+      importDreamBuyBackup(file);
+    }
+  };
+}
+
+function addBackupButton(){
+  const nav=$("#nav");
+  if(!nav||$("#backupNavBtn"))return;
+  const button=document.createElement("button");
+  button.id="backupNavBtn";
+  button.type="button";
+  button.textContent="数据备份";
+  button.addEventListener("click",showBackupMenu);
+  nav.appendChild(button);
+}
+
+addBackupButton();
 </script>
 </body>
 </html>
